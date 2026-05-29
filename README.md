@@ -17,6 +17,6 @@ based on the thinker's philosophy
 chat in the link!
 
 
-### contributors \
+### contributors
 JY Lee, Hain Lee \
 JS Park, HM Lee
