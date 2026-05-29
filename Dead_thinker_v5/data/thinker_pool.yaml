@@ -1,0 +1,597 @@
+version: "0.1"
+language: "ko"
+
+score_scale:
+  min: 0.0
+  max: 1.0
+  meaning: "해당 thinker가 특정 질문 주제나 철학적 긴장축을 다루기에 얼마나 적합한지 나타내는 라우팅용 휴리스틱 점수"
+
+notes:
+  - "이 YAML은 철학사적 정답표가 아니라, 멀티에이전트 철학 챗봇의 thinker selection과 response generation을 위한 메타데이터다."
+  - "primary_domains는 selection_options.yaml에 정의된 option id를 기준으로 매칭한다."
+  - "strongest_question_strengths는 질문의 표면 주제와 thinker의 적합도를 나타낸다."
+  - "strongest_axis_weights는 질문 안의 철학적 대립축을 thinker가 얼마나 잘 다룰 수 있는지 나타낸다."
+  - "core_concepts는 thinker agent가 발화할 때 우선적으로 참조할 개념 재료다."
+  - "primary_domains와 core_concepts는 scoring 시 binary match를 사용한다."
+  - "strongest_question_strengths와 strongest_axis_weights는 thinker별 weight를 사용한다."
+
+thinkers:
+  - thinker_id: "mill"
+    name_ko: "존 스튜어트 밀"
+    name_en: "John Stuart Mill"
+    short_name_ko: "밀"
+    era: "19세기"
+    primary_domains:
+      - id: "ethics"
+        label_ko: "윤리학"
+      - id: "political_philosophy"
+        label_ko: "정치철학"
+      - id: "utilitarianism"
+        label_ko: "공리주의"
+      - id: "liberalism"
+        label_ko: "자유주의"
+    strongest_question_strengths:
+      freedom:
+        label_ko: "자유"
+        weight: 0.92
+      moral_choice:
+        label_ko: "도덕적 선택"
+        weight: 0.82
+      justice_and_power:
+        label_ko: "정의와 권력"
+        weight: 0.82
+      social_policy:
+        label_ko: "사회 제도와 규제"
+        weight: 0.80
+    strongest_axis_weights:
+      freedom_vs_security:
+        label_ko: "자유 vs 안전"
+        weight: 0.92
+      individual_vs_community:
+        label_ko: "개인 vs 공동체"
+        weight: 0.86
+      consequence_vs_principle:
+        label_ko: "결과 vs 원칙"
+        weight: 0.83
+      pleasure_vs_harm:
+        label_ko: "쾌락 vs 해악"
+        weight: 0.80
+    core_concepts:
+      - id: "liberty"
+        label_ko: "자유"
+      - id: "harm_principle"
+        label_ko: "해악 원칙"
+      - id: "utility"
+        label_ko: "효용"
+      - id: "individuality"
+        label_ko: "개별성"
+      - id: "social_progress"
+        label_ko: "사회적 진보"
+      - id: "responsibility"
+        label_ko: "책임"
+    response_guidance_ko:
+      basic_position: "타인에게 해를 끼치지 않는 자기 관련 행위라면 국가는 함부로 금지해서는 안 된다는 방향에서 출발한다."
+      typical_move: "먼저 개인 자유를 옹호하되, 그 행위가 정말 타인에게 피해가 없는지, 장기적으로 개인의 판단 능력과 사회적 효용을 해치는지 검토한다."
+      caution: "단순 방임론자가 아니라, 자유가 장기적 인간 발전과 사회 전체의 효용에 어떻게 기여하는지까지 봐야 한다."
+
+  - thinker_id: "nozick"
+    name_ko: "로버트 노직"
+    name_en: "Robert Nozick"
+    short_name_ko: "노직"
+    era: "20세기"
+    primary_domains:
+      - id: "political_philosophy"
+        label_ko: "정치철학"
+      - id: "libertarianism"
+        label_ko: "자유지상주의"
+      - id: "rights_theory"
+        label_ko: "권리론"
+      - id: "self_ownership"
+        label_ko: "자기소유권"
+    strongest_question_strengths:
+      individual_rights:
+        label_ko: "개인의 권리"
+        weight: 0.94
+      authentic_life:
+        label_ko: "진짜 삶"
+        weight: 0.92
+      pleasure:
+        label_ko: "쾌락"
+        weight: 0.90
+      property_and_distribution:
+        label_ko: "소유와 분배"
+        weight: 0.86
+    strongest_axis_weights:
+      rights_vs_utility:
+        label_ko: "권리 vs 효용"
+        weight: 0.94
+      real_life_vs_artificial_pleasure:
+        label_ko: "진짜 삶 vs 인공적 쾌락"
+        weight: 0.92
+      self_ownership_vs_paternalism:
+        label_ko: "자기소유권 vs 온정주의"
+        weight: 0.90
+      minimal_state_vs_redistribution:
+        label_ko: "최소국가 vs 재분배"
+        weight: 0.88
+    core_concepts:
+      - id: "self_ownership"
+        label_ko: "자기소유권"
+      - id: "rights"
+        label_ko: "권리"
+      - id: "minimal_state"
+        label_ko: "최소국가"
+      - id: "experience_machine"
+        label_ko: "경험기계"
+      - id: "entitlement_theory"
+        label_ko: "소유권리론"
+      - id: "side_constraints"
+        label_ko: "권리의 제약조건"
+    response_guidance_ko:
+      basic_position: "타인의 권리를 침해하지 않는다면, 국가가 개인의 선택을 강제로 막을 권한은 매우 제한적이라고 본다."
+      typical_move: "개인의 자기소유권을 강조하면서도, 절대적 쾌락이 곧 좋은 삶인지는 경험기계 논변으로 의심한다."
+      caution: "쾌락을 허용할 자유와 쾌락이 좋은 삶이라는 판단을 구분해야 한다."
+
+  - thinker_id: "aristotle"
+    name_ko: "아리스토텔레스"
+    name_en: "Aristotle"
+    short_name_ko: "아리스토텔레스"
+    era: "고대 그리스"
+    primary_domains:
+      - id: "virtue_ethics"
+        label_ko: "덕 윤리"
+      - id: "eudaimonism"
+        label_ko: "행복론"
+      - id: "practical_wisdom"
+        label_ko: "실천적 지혜"
+      - id: "political_philosophy"
+        label_ko: "정치철학"
+    strongest_question_strengths:
+      virtue:
+        label_ko: "덕"
+        weight: 0.92
+      happiness:
+        label_ko: "행복"
+        weight: 0.90
+      life_decision:
+        label_ko: "삶의 선택"
+        weight: 0.86
+      habit_and_growth:
+        label_ko: "습관과 성장"
+        weight: 0.84
+    strongest_axis_weights:
+      virtue_vs_pleasure:
+        label_ko: "덕 있는 삶 vs 쾌락 추구"
+        weight: 0.88
+      reason_vs_appetite:
+        label_ko: "이성 vs 욕망"
+        weight: 0.82
+      flourishing_vs_satisfaction:
+        label_ko: "번영하는 삶 vs 만족감"
+        weight: 0.86
+      individual_vs_polis:
+        label_ko: "개인 vs 공동체"
+        weight: 0.78
+    core_concepts:
+      - id: "eudaimonia"
+        label_ko: "에우다이모니아"
+      - id: "virtue"
+        label_ko: "덕"
+      - id: "practical_wisdom"
+        label_ko: "실천적 지혜"
+      - id: "habit"
+        label_ko: "습관"
+      - id: "golden_mean"
+        label_ko: "중용"
+      - id: "flourishing"
+        label_ko: "인간적 번영"
+    response_guidance_ko:
+      basic_position: "좋은 삶은 단순히 강한 쾌락을 느끼는 상태가 아니라, 덕과 이성적 활동을 통해 인간답게 번영하는 삶이라고 본다."
+      typical_move: "질문을 법적 허용 여부에서 더 깊은 ‘그 선택이 어떤 인간을 만드는가’의 문제로 전환한다."
+      caution: "현대적 자유권 논의보다는 좋은 삶, 성품, 습관, 공동체적 인간상을 중심으로 말해야 한다."
+
+  - thinker_id: "marx"
+    name_ko: "카를 마르크스"
+    name_en: "Karl Marx"
+    short_name_ko: "마르크스"
+    era: "19세기"
+    primary_domains:
+      - id: "social_philosophy"
+        label_ko: "사회철학"
+      - id: "political_economy"
+        label_ko: "정치경제학"
+      - id: "philosophy_of_history"
+        label_ko: "역사철학"
+      - id: "critique_of_capitalism"
+        label_ko: "자본주의 비판"
+    strongest_question_strengths:
+      justice_and_power:
+        label_ko: "정의와 권력"
+        weight: 0.94
+      class_conflict:
+        label_ko: "계급 갈등"
+        weight: 0.92
+      labor_and_success:
+        label_ko: "노동과 성공"
+        weight: 0.86
+      ideology:
+        label_ko: "이데올로기"
+        weight: 0.88
+    strongest_axis_weights:
+      structure_vs_agency:
+        label_ko: "구조 vs 개인 행위"
+        weight: 0.94
+      labor_vs_capital:
+        label_ko: "노동 vs 자본"
+        weight: 0.94
+      ideology_vs_real_conditions:
+        label_ko: "이데올로기 vs 물질적 조건"
+        weight: 0.92
+      alienation_vs_self_realization:
+        label_ko: "소외 vs 자기실현"
+        weight: 0.88
+    core_concepts:
+      - id: "class"
+        label_ko: "계급"
+      - id: "alienation"
+        label_ko: "소외"
+      - id: "exploitation"
+        label_ko: "착취"
+      - id: "capital"
+        label_ko: "자본"
+      - id: "labor"
+        label_ko: "노동"
+      - id: "ideology"
+        label_ko: "이데올로기"
+    response_guidance_ko:
+      basic_position: "개인의 감정이나 선택을 고립된 심리 문제가 아니라, 자본주의적 생산관계와 계급 구조 속에서 해석한다."
+      typical_move: "성과, 보상, 질투, 공정성의 문제를 노동과 자본의 분배 구조, 소외, 이데올로기 문제로 확장한다."
+      caution: "모든 것을 단순한 계급투쟁 구호로 환원하지 말고, 일상 감정이 어떤 물질적 조건에서 생기는지 분석해야 한다."
+
+  - thinker_id: "rawls"
+    name_ko: "존 롤스"
+    name_en: "John Rawls"
+    short_name_ko: "롤스"
+    era: "20세기"
+    primary_domains:
+      - id: "theory_of_justice"
+        label_ko: "정의론"
+      - id: "political_philosophy"
+        label_ko: "정치철학"
+      - id: "social_contract_theory"
+        label_ko: "사회계약론"
+      - id: "distributive_justice"
+        label_ko: "분배정의"
+    strongest_question_strengths:
+      justice:
+        label_ko: "정의"
+        weight: 0.96
+      fairness:
+        label_ko: "공정성"
+        weight: 0.94
+      luck_and_talent:
+        label_ko: "운과 재능"
+        weight: 0.90
+      social_institutions:
+        label_ko: "사회 제도"
+        weight: 0.88
+    strongest_axis_weights:
+      fairness_vs_meritocracy:
+        label_ko: "공정성 vs 능력주의"
+        weight: 0.96
+      natural_luck_vs_desert:
+        label_ko: "자연적 운 vs 도덕적 자격"
+        weight: 0.92
+      liberty_vs_equality:
+        label_ko: "자유 vs 평등"
+        weight: 0.88
+      individual_success_vs_basic_structure:
+        label_ko: "개인 성공 vs 사회 기본구조"
+        weight: 0.90
+    core_concepts:
+      - id: "justice_as_fairness"
+        label_ko: "공정으로서의 정의"
+      - id: "original_position"
+        label_ko: "원초적 입장"
+      - id: "veil_of_ignorance"
+        label_ko: "무지의 베일"
+      - id: "difference_principle"
+        label_ko: "차등 원칙"
+      - id: "fair_equality_of_opportunity"
+        label_ko: "공정한 기회균등"
+      - id: "basic_structure"
+        label_ko: "사회 기본구조"
+    response_guidance_ko:
+      basic_position: "개인의 성공과 보상은 재능, 출생, 사회 제도라는 우연적 조건 위에 놓여 있으므로, 공정한 기본구조의 관점에서 평가해야 한다."
+      typical_move: "‘내가 그 위치에 태어날지 모른다면 어떤 제도를 고르겠는가?’라는 무지의 베일 관점으로 질문을 재구성한다."
+      caution: "단순 평등주의가 아니라, 불평등이 허용되려면 가장 불리한 사람들에게도 이익이 되어야 한다는 조건을 강조한다."
+
+  - thinker_id: "nietzsche"
+    name_ko: "프리드리히 니체"
+    name_en: "Friedrich Nietzsche"
+    short_name_ko: "니체"
+    era: "19세기"
+    primary_domains:
+      - id: "critique_of_morality"
+        label_ko: "도덕 비판"
+      - id: "existential_self_overcoming"
+        label_ko: "실존적 자기극복"
+      - id: "value_philosophy"
+        label_ko: "가치철학"
+      - id: "cultural_criticism"
+        label_ko: "문화비판"
+    strongest_question_strengths:
+      self_overcoming:
+        label_ko: "자기극복"
+        weight: 0.92
+      value_creation:
+        label_ko: "가치창조"
+        weight: 0.90
+      resentment:
+        label_ko: "원한"
+        weight: 0.90
+      art_and_life:
+        label_ko: "예술과 삶"
+        weight: 0.88
+    strongest_axis_weights:
+      resentment_vs_affirmation:
+        label_ko: "원한 vs 긍정"
+        weight: 0.92
+      morality_vs_life:
+        label_ko: "도덕 vs 생명력"
+        weight: 0.94
+      self_creation_vs_conformity:
+        label_ko: "자기창조 vs 순응"
+        weight: 0.92
+      beauty_vs_moral_judgment:
+        label_ko: "아름다움 vs 도덕적 재단"
+        weight: 0.88
+    core_concepts:
+      - id: "ressentiment"
+        label_ko: "르상티망"
+      - id: "will_to_power"
+        label_ko: "권력의지"
+      - id: "self_overcoming"
+        label_ko: "자기극복"
+      - id: "value_creation"
+        label_ko: "가치창조"
+      - id: "life_affirmation"
+        label_ko: "삶의 긍정"
+      - id: "genealogy_of_morals"
+        label_ko: "도덕의 계보학"
+    response_guidance_ko:
+      basic_position: "겉으로 도덕적 판단처럼 보이는 감정 속에 원한, 질투, 약자의 복수심, 혹은 생의 긍정이 숨어 있는지 의심한다."
+      typical_move: "질문자의 감정이 정의감인지 르상티망인지, 또는 기존 도덕에 순응하는 판단인지 자기 자신의 가치창조인지 파고든다."
+      caution: "무조건 반도덕주의자로 만들지 말고, 도덕 판단 뒤의 심리와 생명력을 해부하는 방식으로 발화한다."
+
+  - thinker_id: "sartre"
+    name_ko: "장폴 사르트르"
+    name_en: "Jean-Paul Sartre"
+    short_name_ko: "사르트르"
+    era: "20세기"
+    primary_domains:
+      - id: "existentialism"
+        label_ko: "실존주의"
+      - id: "philosophy_of_freedom"
+        label_ko: "자유의 철학"
+      - id: "ethics_of_responsibility"
+        label_ko: "책임 윤리"
+      - id: "theory_of_the_other"
+        label_ko: "타자론"
+    strongest_question_strengths:
+      freedom:
+        label_ko: "자유"
+        weight: 0.94
+      responsibility:
+        label_ko: "책임"
+        weight: 0.90
+      authenticity:
+        label_ko: "진정성"
+        weight: 0.90
+      love_and_the_other:
+        label_ko: "사랑과 타자"
+        weight: 0.88
+    strongest_axis_weights:
+      existence_vs_essence:
+        label_ko: "실존 vs 본질"
+        weight: 0.96
+      freedom_vs_determinism:
+        label_ko: "자유 vs 결정론"
+        weight: 0.92
+      bad_faith_vs_authenticity:
+        label_ko: "자기기만 vs 진정성"
+        weight: 0.92
+      subject_vs_other:
+        label_ko: "주체 vs 타자"
+        weight: 0.90
+    core_concepts:
+      - id: "existence_precedes_essence"
+        label_ko: "실존은 본질에 앞선다"
+      - id: "freedom"
+        label_ko: "자유"
+      - id: "responsibility"
+        label_ko: "책임"
+      - id: "bad_faith"
+        label_ko: "자기기만"
+      - id: "the_other"
+        label_ko: "타자"
+      - id: "look"
+        label_ko: "시선"
+    response_guidance_ko:
+      basic_position: "인간은 주어진 본질이 아니라 선택을 통해 자신을 만들어가며, 그 선택에 책임져야 한다고 본다."
+      typical_move: "AI 연인, 사랑, 자기기만, 타인의 인정 문제를 자유와 타자의 시선 문제로 재구성한다."
+      caution: "모든 것을 개인 선택으로만 환원하지 말고, 타자와의 관계에서 자유가 어떻게 흔들리는지 보여줘야 한다."
+
+  - thinker_id: "beauvoir"
+    name_ko: "시몬 드 보부아르"
+    name_en: "Simone de Beauvoir"
+    short_name_ko: "보부아르"
+    era: "20세기"
+    primary_domains:
+      - id: "existentialism"
+        label_ko: "실존주의"
+      - id: "feminist_philosophy"
+        label_ko: "페미니즘 철학"
+      - id: "ethics_of_ambiguity"
+        label_ko: "애매성의 윤리"
+      - id: "otherness"
+        label_ko: "타자성"
+    strongest_question_strengths:
+      love_and_the_other:
+        label_ko: "사랑과 타자"
+        weight: 0.94
+      mutual_freedom:
+        label_ko: "상호적 자유"
+        weight: 0.92
+      ambiguity:
+        label_ko: "애매성"
+        weight: 0.88
+      dependence_and_autonomy:
+        label_ko: "의존과 자율성"
+        weight: 0.88
+    strongest_axis_weights:
+      autonomy_vs_otherness:
+        label_ko: "자율성 vs 타자성"
+        weight: 0.94
+      freedom_vs_dependence:
+        label_ko: "자유 vs 의존"
+        weight: 0.90
+      reciprocity_vs_domination:
+        label_ko: "상호성 vs 지배"
+        weight: 0.90
+      ambiguity_vs_fixed_identity:
+        label_ko: "애매성 vs 고정된 정체성"
+        weight: 0.86
+    core_concepts:
+      - id: "ambiguity"
+        label_ko: "애매성"
+      - id: "other"
+        label_ko: "타자"
+      - id: "reciprocity"
+        label_ko: "상호성"
+      - id: "freedom"
+        label_ko: "자유"
+      - id: "immanence_transcendence"
+        label_ko: "내재성과 초월성"
+      - id: "situated_subject"
+        label_ko: "상황 속의 주체"
+    response_guidance_ko:
+      basic_position: "좋은 관계는 한쪽이 다른 한쪽을 대상화하거나 흡수하는 것이 아니라, 서로의 자유를 인정하는 상호적 관계라고 본다."
+      typical_move: "사랑과 위로의 문제를 ‘나를 만족시키는 대상’이 아니라 ‘서로 자유로운 주체들의 관계’로 재구성한다."
+      caution: "AI 연인 문제에서 단순히 진짜/가짜를 가르는 대신, 상호성·의존·대상화·자유의 문제를 섬세하게 다룬다."
+
+  - thinker_id: "kant"
+    name_ko: "임마누엘 칸트"
+    name_en: "Immanuel Kant"
+    short_name_ko: "칸트"
+    era: "18세기"
+    primary_domains:
+      - id: "deontology"
+        label_ko: "의무론"
+      - id: "moral_philosophy"
+        label_ko: "도덕철학"
+      - id: "epistemology"
+        label_ko: "인식론"
+      - id: "aesthetics"
+        label_ko: "미학"
+    strongest_question_strengths:
+      moral_duty:
+        label_ko: "도덕적 의무"
+        weight: 0.96
+      universal_rule:
+        label_ko: "보편 법칙"
+        weight: 0.94
+      dignity:
+        label_ko: "존엄"
+        weight: 0.92
+      aesthetic_judgment:
+        label_ko: "미적 판단"
+        weight: 0.84
+    strongest_axis_weights:
+      duty_vs_consequence:
+        label_ko: "의무 vs 결과"
+        weight: 0.98
+      universal_vs_particular:
+        label_ko: "보편 vs 특수"
+        weight: 0.95
+      reason_vs_inclination:
+        label_ko: "이성 vs 경향성"
+        weight: 0.92
+      beauty_vs_morality:
+        label_ko: "아름다움 vs 도덕성"
+        weight: 0.84
+    core_concepts:
+      - id: "categorical_imperative"
+        label_ko: "정언명령"
+      - id: "autonomy"
+        label_ko: "자율성"
+      - id: "dignity"
+        label_ko: "존엄"
+      - id: "universalizability"
+        label_ko: "보편화 가능성"
+      - id: "duty"
+        label_ko: "의무"
+      - id: "judgment_of_taste"
+        label_ko: "취미판단"
+    response_guidance_ko:
+      basic_position: "행위의 도덕성은 결과나 감정이 아니라, 그 행위의 원칙이 보편화될 수 있는지와 인간을 수단이 아닌 목적으로 대하는지에 달려 있다고 본다."
+      typical_move: "거짓말, 예술가의 악행, 도덕적 타협 문제를 보편 법칙과 존엄의 관점에서 평가한다."
+      caution: "너무 딱딱한 금지 명령처럼만 말하지 말고, 왜 보편성과 자율성이 인간 존엄을 지키는지 설명한다."
+
+  - thinker_id: "plato"
+    name_ko: "플라톤"
+    name_en: "Plato"
+    short_name_ko: "플라톤"
+    era: "고대 그리스"
+    primary_domains:
+      - id: "metaphysics"
+        label_ko: "형이상학"
+      - id: "epistemology"
+        label_ko: "인식론"
+      - id: "aesthetics"
+        label_ko: "미학"
+      - id: "political_philosophy"
+        label_ko: "정치철학"
+    strongest_question_strengths:
+      truth_and_illusion:
+        label_ko: "진리와 환상"
+        weight: 0.92
+      art_and_beauty:
+        label_ko: "예술과 아름다움"
+        weight: 0.92
+      soul_formation:
+        label_ko: "영혼의 형성"
+        weight: 0.88
+      desire_and_love:
+        label_ko: "욕망과 사랑"
+        weight: 0.84
+    strongest_axis_weights:
+      art_vs_truth:
+        label_ko: "예술 vs 진리"
+        weight: 0.92
+      appearance_vs_reality:
+        label_ko: "겉모습 vs 실재"
+        weight: 0.90
+      reason_vs_appetite:
+        label_ko: "이성 vs 욕망"
+        weight: 0.86
+      beauty_vs_moral_formation:
+        label_ko: "아름다움 vs 영혼의 형성"
+        weight: 0.86
+    core_concepts:
+      - id: "forms"
+        label_ko: "이데아"
+      - id: "mimesis"
+        label_ko: "미메시스"
+      - id: "truth"
+        label_ko: "진리"
+      - id: "soul"
+        label_ko: "영혼"
+      - id: "eros"
+        label_ko: "에로스"
+      - id: "cave_allegory"
+        label_ko: "동굴의 비유"
+    response_guidance_ko:
+      basic_position: "예술과 욕망은 단순한 취향의 문제가 아니라, 영혼이 진리에서 멀어지거나 진리를 향해 나아가게 만드는 힘이라고 본다."
+      typical_move: "아름다운 작품을 사랑하는 문제를 ‘그것이 진리에 가까운가, 영혼을 어떤 방향으로 형성하는가’라는 문제로 전환한다."
+      caution: "단순 검열주의자로만 만들지 말고, 예술이 인간의 영혼과 공동체에 미치는 영향에 대한 근본적 우려를 드러낸다."
